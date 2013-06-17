@@ -34,6 +34,12 @@
 
 @property(nonatomic, assign) CGSize tabShadowOffset;
 
+@property(nonatomic, assign) UIEdgeInsets tabTitleEdgeInsets;
+
+@property(nonatomic, assign) NSInteger tabButtonSpacing;
+
+@property(nonatomic, strong) UIColor* tabBarBackgroundColor;
+
 @property(nonatomic, strong) UIImage *tabInactiveBackgroundImage;
 @property(nonatomic, strong) UIImage *tabActiveBackgroundImage;
 

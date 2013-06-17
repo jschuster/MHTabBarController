@@ -39,6 +39,9 @@ static const NSInteger TAG_OFFSET = 1000;
 
 @synthesize tabTitleFont;
 @synthesize tabShadowOffset;
+@synthesize tabTitleEdgeInsets;
+@synthesize tabButtonSpacing;
+@synthesize tabBarBackgroundColor;
 @synthesize tabInactiveBackgroundImage;
 @synthesize tabActiveBackgroundImage;
 @synthesize tabInactiveTitleColor;
@@ -82,6 +85,7 @@ static const NSInteger TAG_OFFSET = 1000;
         
 		button.titleLabel.font = tabTitleFont;
 		button.titleLabel.shadowOffset = tabShadowOffset;
+    button.titleEdgeInsets = tabTitleEdgeInsets;
                 
         [button setBackgroundImage:tabInactiveBackgroundImage forState:UIControlStateNormal];
         [button setBackgroundImage:tabActiveBackgroundImage forState:UIControlStateHighlighted];
@@ -128,12 +132,17 @@ static const NSInteger TAG_OFFSET = 1000;
 	NSArray *buttons = [tabButtonsContainerView subviews];
 	for (UIButton *button in buttons)
 	{
-		if (index == count - 1)
+		if (index == count - 1) {
 			rect.size.width = tabButtonsContainerView.bounds.size.width - rect.origin.x;
-
+    }
+    else {
+      rect.size.width = rect.size.width - tabButtonSpacing;
+    }
+    
 		button.frame = rect;
-		rect.origin.x += rect.size.width;
+		rect.origin.x += rect.size.width + tabButtonSpacing;
 
+    
 		if (index == self.selectedIndex)
 			[self centerIndicatorOnButton:button];
 
@@ -151,6 +160,7 @@ static const NSInteger TAG_OFFSET = 1000;
         CGRect rect = CGRectMake(0, 0, self.view.bounds.size.width, TAB_BAR_HEIGHT);
         tabButtonsContainerView = [[UIView alloc] initWithFrame:rect];
         tabButtonsContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        tabButtonsContainerView.backgroundColor = self.tabBarBackgroundColor;
         [self.view addSubview:tabButtonsContainerView];
     }
 
